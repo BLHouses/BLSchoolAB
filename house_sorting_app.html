@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hive of Destiny</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #1e1e1e, #2d2d2d);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 0.5em;
+    }
+    .hive {
+      background: url('https://cdn.pixabay.com/photo/2022/06/03/07/12/beehive-7240892_1280.png') no-repeat center;
+      background-size: contain;
+      width: 300px;
+      height: 300px;
+      cursor: pointer;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    .result {
+      display: none;
+      text-align: center;
+      margin-top: 2em;
+    }
+    .house-name {
+      font-size: 2em;
+      font-weight: bold;
+    }
+    .desc {
+      font-size: 1.2em;
+      margin-top: 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <h1>🐝 Hive of Destiny 🐝</h1>
+  <p>Place your hand on the hive and discover your swarm...</p>
+  <div class="hive" onclick="sortStudent()"></div>
+
+  <div class="result" id="result">
+    <p class="house-name" id="house-name"></p>
+    <p class="desc" id="house-desc"></p>
+  </div>
+
+  <audio id="background-music" loop>
+    <source src="https://cdn.pixabay.com/audio/2022/03/04/audio_2a0b5cc1e4.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const houses = ["Bumblebees", "Hornets", "Wasps", "Scorpions"];
+    const messages = {
+      Bumblebees: "Warm-hearted, loyal, and full of quiet strength.",
+      Hornets: "Brave, daring, and unafraid to face challenges.",
+      Wasps: "Sharp-minded and cunning. Your weapon is your wit.",
+      Scorpions: "Intense, focused, and unstoppable."
+    };
+
+    function playMusic() {
+      const music = document.getElementById("background-music");
+      if (music.paused) {
+        music.volume = 0.4;
+        music.play();
+      }
+    }
+
+    function sortStudent() {
+      const chosen = houses[Math.floor(Math.random() * houses.length)];
+      document.getElementById("house-name").textContent = `You are a ${chosen}!`;
+      document.getElementById("house-desc").textContent = messages[chosen];
+      document.getElementById("result").style.display = "block";
+      playMusic();
+    }
+  </script>
+</body>
+</html>
